@@ -7,9 +7,9 @@ This project demonstrates a full CI/CD pipeline for a Java Spring Boot applicati
 The following diagram illustrates the technical flow and the integration between local tools (Jenkins, Maven, Docker) and AWS Cloud services:
 
 <p align="center">
-  <img src="./Screenshots/0-architecture-design.PNG" width="100%">
+  <img src="./Screenshots/1-design_overview.png" width="100%">
   <br>
-  <em><b>Figure 0:</b> CI/CD Pipeline Architecture Flow</em>
+  <em><b>Figure 1:</b> CI/CD Pipeline Architecture Flow</em>
 </p>
 
 ---
