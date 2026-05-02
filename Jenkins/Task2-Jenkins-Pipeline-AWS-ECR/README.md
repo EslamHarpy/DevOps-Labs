@@ -104,3 +104,122 @@ Now, we store the keys we generated in the previous step inside Jenkins.
   <br>
   <em><b>Figure 6:</b> Mapping AWS Keys to Jenkins Credentials</em>
 </p>
+
+---
+
+## Jenkins Pipeline Implementation
+
+In this section, we transition from manual configuration to **Pipeline as Code**. We used a **Declarative Pipeline** (Groovy) to define the automation steps.
+
+### 1. Creating the Pipeline Job
+1. In Jenkins, select **New Item** and choose **Pipeline**.
+2. Name it `docker-ECR-push-pull`.
+3. In the **Pipeline** section, we chose "Pipeline script" and pasted our `Jenkinsfile`.
+
+<p align="center">
+  <img src="./Screenshots/7-jenkins_pipeline_job_setup.png" width="100%">
+  <br>
+  <em><b>Figure 7:</b> Creating the Pipeline Job in Jenkins</em>
+</p>
+
+### 2. Pipeline Stages Breakdown (The Jenkinsfile Logic)
+
+#### Stage 1: Environment & System Info
+Before starting, Jenkins prints the current system date, user, and path. This is crucial for debugging and ensuring the environment is ready.
+
+<p align="center">
+  <img src="./Screenshots/8-stage_system_info.png" width="100%">
+  <br>
+  <em><b>Figure 8:</b> Stage 1 - System Information Verification</em>
+</p>
+
+#### Stage 2: SCM (Cloning the Repository)
+Jenkins pulls the latest code from the GitHub repository. Since we are in a local environment, this is triggered manually.
+
+<p align="center">
+  <img src="./Screenshots/9-stage_scm_clone.png" width="100%">
+  <br>
+  <em><b>Figure 9:</b> Stage 2 - Successful SCM (Source Code Management)</em>
+</p>
+
+#### Stage 3: Maven Build & Test
+This is where the magic happens for Java. Jenkins uses the configured Maven tool to:
+- Update `application.properties` to run on port `8081`.
+- Run `mvn clean package` to execute tests and generate the JAR file.
+
+<p align="center">
+  <img src="./Screenshots/10-stage_maven_build.png" width="100%">
+  <br>
+  <em><b>Figure 10:</b> Stage 3 - Maven Build & Unit Testing Success</em>
+</p>
+
+#### Stage 4: Dockerization (Build & Tag)
+Jenkins uses the `Dockerfile` to build the image and tags it with `${env.BUILD_NUMBER}` for versioning and `latest` for production.
+
+<p align="center">
+  <img src="./Screenshots/11-stage_docker_build.png" width="100%">
+  <br>
+  <em><b>Figure 11:</b> Stage 4 - Docker Image Build and Tagging</em>
+</p>
+
+#### Stage 5: AWS ECR Authentication & Push
+Using the `aws-credentials-id` we created, Jenkins logs into AWS ECR and pushes both tags.
+
+<p align="center">
+  <img src="./Screenshots/12-stage_ecr_push.png" width="100%">
+  <br>
+  <em><b>Figure 12:</b> Stage 5 - Successfully Pushing Image to AWS ECR</em>
+</p>
+
+#### Stage 6: Deployment (Run Container)
+The final stage cleans up any old container and runs the new one on port `8081`.
+
+<p align="center">
+  <img src="./Screenshots/13-stage_deployment.png" width="100%">
+  <br>
+  <em><b>Figure 13:</b> Stage 6 - Final Local Deployment Success</em>
+</p>
+
+---
+
+### 3. Pipeline Execution & Stage View
+After triggering the build, we can monitor the progress through the **Jenkins Stage View**. This provides a visual representation of each stage's duration and status.
+
+<p align="center">
+  <img src="./Screenshots/14-pipeline_stage_view.png" width="100%">
+  <br>
+  <em><b>Figure 14:</b> Successful Jenkins Pipeline Stage View (All Green)</em>
+</p>
+
+### 4. Application Verification
+Once the `Run Container` stage completes, we verify the deployment through two methods:
+
+#### A. Docker Terminal Verification
+We check the running containers on the local host to ensure `petclinic-app` is active on port `8081`.
+```bash
+docker ps
+```
+<p align="center">
+  <img src="./Screenshots/15-docker_ps_verify.png" width="100%">
+  <br>
+  <em><b>Figure 14:</b> Successful Jenkins Pipeline Stage View (All Green)</em>
+</p>
+
+#### B. Web Browser Access
+Finally, we access the application via the browser at http://localhost:8081. The Spring Petclinic home page confirms that the entire CI/CD flow—from GitHub to AWS ECR and back to Local Deployment—is working perfectly.
+
+<p align="center">
+  <img src="./Screenshots/16-app_web_interface.png" width="100%">
+  <br>
+  <em><b>Figure 14:</b> Successful Jenkins Pipeline Stage View (All Green)</em>
+</p>
+
+## Conclusion
+In this task, we successfully built a robust Declarative Pipeline that integrates:
+
+- **Build Tools**: Maven & JDK 17.
+- **Containerization**: Docker.
+- **Cloud Storage**: AWS Elastic Container Registry (ECR).
+- **Automation**: Jenkins CI/CD.
+
+This project highlights the ability to manage complex DevOps workflows even in a local environment with cloud integration.
