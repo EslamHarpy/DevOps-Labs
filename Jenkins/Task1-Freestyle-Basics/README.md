@@ -26,8 +26,11 @@ After adding Jenkins to the Docker group, restart the Jenkins service:
 sudo systemctl restart jenkins
 ```
 
-![Execting Docker Image ](./Screenshots/1-execting_docker_image.PNG)
-                                              *Figure 1:Execting Docker Image*
+<p align="center">
+  <img src="./screenshots/docker_ps_image.png" width="800">
+  <br>
+  <em><b>Figure 1:</b> Executing Docker Image</em>
+</p>
                                               
 ![Execting Docker Image Check In Web ](./Screenshots/2-execting_docker_image_web.PNG)
                                               *Figure 2:Execting Docker Image check in web*
