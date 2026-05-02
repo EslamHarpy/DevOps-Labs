@@ -26,7 +26,8 @@ After adding Jenkins to the Docker group, restart the Jenkins service:
 ```bash
 sudo systemctl restart jenkins
 ```
-
+![Execting Docker Image ](./Screenshots/1-execting_docker_image.PNG)
+*Execting Docker Image*
 ### 2. Remove Existing Nginx Docker Image
 
 Create a Jenkins freestyle job that removes the existing Nginx Docker image named `nginx_jenkins`. Follow these steps:
