@@ -23,3 +23,16 @@ Before running this pipeline, ensure the following are configured:
 - **Jenkins Credentials**: AWS Credentials stored with the ID `aws-credentials-id`.
 
 ---
+
+## Installation & Configuration
+
+To enable the local Jenkins server to interact with Docker and AWS, the following setup was performed on the host machine.
+
+### 1. Docker Installation & Permissions
+Since Jenkins needs to build and run containers, it must have access to the Docker engine.
+- **Install Docker:**
+  
+```bash
+  sudo apt update
+  sudo apt install docker.io -y
+```
