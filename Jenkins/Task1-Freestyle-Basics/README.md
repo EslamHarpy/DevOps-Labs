@@ -19,7 +19,8 @@ To allow Jenkins to manage Docker containers, you must add the Jenkins user to t
 ```bash
 sudo usermod -aG docker jenkins
 ```
-![Execting Docker Image ](./screenshots/1-execting_docker_image.PNG)
+![Execting Docker Image ](./Screenshots/1-execting_docker_image.PNG)
+
 After adding Jenkins to the Docker group, restart the Jenkins service:
 
 ```bash
