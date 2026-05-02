@@ -27,7 +27,7 @@ sudo systemctl restart jenkins
 ```
 
 <p align="center">
-  <img src="./Screenshots/docker_ps_image.png" width="800">
+  <img src="./Screenshots/1-execting_docker_image.PNG" width="800">
   <br>
   <em><b>Figure 1:</b> Executing Docker Image</em>
 </p>
