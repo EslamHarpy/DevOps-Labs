@@ -25,8 +25,10 @@ After adding Jenkins to the Docker group, restart the Jenkins service:
 ```bash
 sudo systemctl restart jenkins
 ```
+
 ![Execting Docker Image ](./Screenshots/1-execting_docker_image.PNG)
                                               *Figure 1:Execting Docker Image*
+                                              
 ![Execting Docker Image Check In Web ](./Screenshots/2-execting_docker_image_web.PNG)
                                               *Figure 2:Execting Docker Image check in web*
 
@@ -45,10 +47,13 @@ We used || true to prevent the job from failing if the container does not exist.
 
 ![Removing Step In Freestyle](./Screenshots/3-removing_step_in_freestyle.PNG)
                                               *Figure 3:Removing Step In Freestyle*
+                                              
 ![Removing Step Success](./Screenshots/4-removing_success.PNG)
                                               *Figure 4:Removing Step Success*
+                                              
 ![Removing Success Check In Terminal](./Screenshots/5-removing_success_check_in_terminal.PNG)
                                               *Figure 5:Removing Success Check In Terminal*
+                                              
 4. Save and run the job to remove the Nginx Docker image.
 
 ### 3. Recreate Nginx Docker Image
@@ -61,8 +66,10 @@ Next, recreate the Nginx Docker image and map port 80 to 3017:
 ```bash
 docker run --name nginx_jenkins -d -p 3017:80 nginx
 ```
+
 ![Creating Docker Container Freestyle Step](./Screenshots/6-creating_docker_container_freestyle_step.PNG)
                                               *Figure 6:Creating Docker Container Freestyle Step*
+                                              
 ![Creating Docker Container Success](./Screenshots/7-creating_docker_container_success.PNG)
                                               *Figure 7:Creating Docker Container Freestyle Step*
                                               
