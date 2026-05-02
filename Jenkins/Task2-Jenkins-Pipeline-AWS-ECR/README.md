@@ -202,7 +202,7 @@ docker ps
 <p align="center">
   <img src="./Screenshots/15-docker_ps_verify.png" width="100%">
   <br>
-  <em><b>Figure 14:</b> Successful Jenkins Pipeline Stage View (All Green)</em>
+  <em><b>Figure 14:</b> Docker ps Verify</em>
 </p>
 
 #### B. Web Browser Access
@@ -211,7 +211,7 @@ Finally, we access the application via the browser at http://localhost:8081. The
 <p align="center">
   <img src="./Screenshots/16-app_web_interface.png" width="100%">
   <br>
-  <em><b>Figure 14:</b> Successful Jenkins Pipeline Stage View (All Green)</em>
+  <em><b>Figure 14:</b> App Web Interface Verify</em>
 </p>
 
 ## Conclusion
