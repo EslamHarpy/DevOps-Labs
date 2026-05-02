@@ -31,9 +31,13 @@ sudo systemctl restart jenkins
   <br>
   <em><b>Figure 1:</b> Executing Docker Image</em>
 </p>
-                                              
-![Execting Docker Image Check In Web ](./Screenshots/2-execting_docker_image_web.PNG)
-                                              *Figure 2:Execting Docker Image check in web*
+
+<p align="center">
+  <img src="./Screenshots/2-execting_docker_image_web.PNG" width="100%">
+  <br>
+  <em><b>Figure 2:</b> Execting Docker Image Check In Web </em>
+</p>
+                                          
 
 ### 2. Remove Existing Nginx Docker Image
 
@@ -48,14 +52,23 @@ docker rm -f nginx_jenkins || true
 ```
 We used || true to prevent the job from failing if the container does not exist.
 
-![Removing Step In Freestyle](./Screenshots/3-removing_step_in_freestyle.PNG)
-                                              *Figure 3:Removing Step In Freestyle*
-                                              
-![Removing Step Success](./Screenshots/4-removing_success.PNG)
-                                              *Figure 4:Removing Step Success*
-                                              
-![Removing Success Check In Terminal](./Screenshots/5-removing_success_check_in_terminal.PNG)
-                                              *Figure 5:Removing Success Check In Terminal*
+<p align="center">
+  <img src="./Screenshots/3-removing_step_in_freestyle.PNG" width="100%">
+  <br>
+  <em><b>Figure 3:</b> Removing Step In Freestyle </em>
+</p>
+
+<p align="center">
+  <img src="./Screenshots/4-removing_success.PNG" width="100%">
+  <br>
+  <em><b>Figure 4:</b> Removing Step Success </em>
+</p>
+
+<p align="center">
+  <img src="./Screenshots/5-removing_success_check_in_terminal.PNG" width="100%">
+  <br>
+  <em><b>Figure 5:</b> Removing Success Check In Terminal </em>
+</p>
                                               
 4. Save and run the job to remove the Nginx Docker image.
 ***
@@ -70,14 +83,20 @@ Next, recreate the Nginx Docker image and map port 80 to 3017:
 docker run --name nginx_jenkins -d -p 3017:80 nginx
 ```
 
-![Creating Docker Container Freestyle Step](./Screenshots/6-creating_docker_container_freestyle_step.PNG)
-                                              *Figure 6:Creating Docker Container Freestyle Step*
-                                              
-![Creating Docker Container Success](./Screenshots/7-creating_docker_container_success.PNG)
-                                              *Figure 7:Creating Docker Container Freestyle Step*
+<p align="center">
+  <img src="./Screenshots/6-creating_docker_container_freestyle_step.PNG" width="100%">
+  <br>
+  <em><b>Figure 6:</b> Creating Docker Container Freestyle Step </em>
+</p>
+
+<p align="center">
+  <img src="./Screenshots/7-creating_docker_container_success.PNG" width="100%">
+  <br>
+  <em><b>Figure 7:</b> Creating Docker Container Success</em>
+</p>
                                               
 3. Save and run the job again to recreate the Nginx Docker image.
-
+***
 ### 4. Verify the Nginx Container
 
 After the job completes, you can verify that the Nginx container is running with the following command:
@@ -86,14 +105,20 @@ After the job completes, you can verify that the Nginx container is running with
 docker ps
 ```
 
-![Creating Docker Container Success Check In Terminal](./Screenshots/8-creating_docker_container_success_check_in_terminal.PNG)
-                                              *Figure 8:Creating Docker Container Success Check In Terminal*
+<p align="center">
+  <img src="./Screenshots/8-creating_docker_container_success_check_in_terminal.PNG" width="100%">
+  <br>
+  <em><b>Figure 8:</b> Creating Docker Container Success Check In Terminal</em>
+</p>
 
-![Creating Docker Container Success Check In Web](./Screenshots/9-creating_docker_container_success_check_in_web.PNG)
-                                              *Figure 9:Creating Docker Container Success Check In Terminal* 
-                                              
+<p align="center">
+  <img src="./Screenshots/9-creating_docker_container_success_check_in_web.PNG" width="100%">
+  <br>
+  <em><b>Figure 9:</b> Creating Docker Container Success Check In Web</em>
+</p>
+                                             
 Look for a container named `nginx_jenkins` with port `3017` mapped to port `80`.
-
+***
 ## Conclusion
 
 This task demonstrated how to use Jenkins to automate Docker commands. By setting up a simple freestyle job, we successfully removed and recreated an Nginx Docker container, illustrating Jenkins' flexibility in managing Docker environments.
