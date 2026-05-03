@@ -1,0 +1,6 @@
+@Library('my-shared-library') _
+
+petclinicPipeline(
+    imageName: 'service-a',
+    appPort: '8081'
+)
