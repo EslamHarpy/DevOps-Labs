@@ -2,6 +2,11 @@
 
 ## 1. Overview
 This project implements a **Centralized Jenkins Shared Library** designed to automate the CI/CD lifecycle for multiple microservices (Service A, B, and C). By utilizing a "Pipeline as Code" strategy, this architecture ensures that all services follow a standardized deployment workflow while remaining highly configurable through dynamic parameters like service names and ports.
+<p align="center">
+  <img src="./Screenshots/0-project-overview.PNG" width="100%">
+  <br>
+  <em><b>Figure 0:</b> Project Overview </em>
+</p>
 
 ## 2. System Architecture
 The following diagram illustrates the interaction between the centralized Shared Library, the independent service repositories, and the underlying infrastructure (AWS ECR & Docker):
