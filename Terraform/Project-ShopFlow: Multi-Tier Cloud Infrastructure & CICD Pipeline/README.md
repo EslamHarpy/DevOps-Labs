@@ -55,6 +55,24 @@ shopflow-infrastructure/
     └── index.html         # Frontend static content
 ```
 ---
+## 🛠️ Technologies & Tools Used
+
+| Tool | Purpose |
+| :--- | :--- |
+| **Terraform** | Infrastructure as Code (IaC) to provision and manage AWS resources. |
+| **Jenkins** | Automating the CI/CD pipeline (Build, Push, Deploy). |
+| **Docker** | Containerizing the ShopFlow application for consistent environments. |
+| **Amazon ECR** | Secure Docker image registry for storing versioned artifacts. |
+| **Amazon VPC** | Isolated network with Public/Private subnets across multiple AZs. |
+| **AWS EC2 & ASG**| Scalable compute instances with Auto Scaling for self-healing. |
+| **AWS ALB** | Application Load Balancer for intelligent traffic distribution. |
+| **Amazon RDS** | Managed MySQL database with Multi-AZ for high availability. |
+| **AWS S3** | Remote backend for Terraform state storage. |
+| **DynamoDB** | State locking to prevent concurrent Terraform executions. |
+| **IAM Roles** | Secure, least-privilege access management for AWS services. |
+| **GitHub** | Version control and source code management. |
+| **Apache/Nginx** | High-performance web servers used within containers. |
+---
 
 ## 🏗 Architectural Deep-Dive
 
@@ -66,8 +84,13 @@ Designed for high availability and security isolation:
     - **Public Subnets**: Host the Load Balancer and NAT Gateway.
     - **Private Subnets**: Isolate EC2 application servers and RDS instances from direct internet access.
 * **NAT Gateway**: Deployed in the Public Subnet to allow private instances to securely fetch updates and pull Docker images while remaining unreachable from the outside.
+<p align="center">
+  <img src="./Screenshots/3-VPC.jpeg" width="100%">
+  <br>
+  <em><b>Figure 2:</b> AWS VPC Resource Map </em>
+</p>
 
-> **[IMAGE_PLACEHOLDER: AWS VPC Resource Map / Architecture Diagram]**
+---
 
 ### 🔐 2. Security & Identity (IAM & Security Groups)
 Following the **Principle of Least Privilege (PoLP)**:
@@ -76,6 +99,8 @@ Following the **Principle of Least Privilege (PoLP)**:
     - **ALB SG**: Inbound allowed only on Port 80 (HTTP) from `0.0.0.0/0`.
     - **App SG**: Strict inbound rules allowed **ONLY** from the ALB Security Group ID on Port 80. This prevents direct bypass attacks.
 
+---
+
 ### 🚀 3. Compute & Scaling (EC2 & ASG Module)
 * **Auto Scaling Group (ASG)**: Configured with `Desired: 2`, `Max: 3` to handle traffic spikes.
 * **Self-Healing**: Instances that fail Health Checks are automatically terminated and replaced.
@@ -83,10 +108,12 @@ Following the **Principle of Least Privilege (PoLP)**:
     - Kernel updates and Docker installation.
     - Automated ECR authentication using AWS CLI.
     - Real-time Docker pull and container execution with port mapping (`80:80`).
+---
 
 ### ⚖️ 4. Traffic Management (ALB)
 * **Application Load Balancer**: Distributes incoming traffic across healthy instances in private subnets.
 * **Target Group Health Checks**: Fine-tuned health probes ensuring only functional containers receive user traffic.
+---
 
 ### 🗄️ 5. Database Layer (RDS)
 * **Multi-AZ MySQL**: Synchronous replication across different AZs for disaster recovery.
@@ -103,7 +130,13 @@ The pipeline is defined in a `Jenkinsfile` and consists of the following stages:
 5. **Terraform Plan**: Generates an execution plan for review.
 6. **Terraform Apply**: Deploys the infrastructure to AWS.
 
-> **[IMAGE_PLACEHOLDER: Jenkins Pipeline Stages Success View]**
+
+<p align="center">
+  <img src="./Screenshots/1-pipeline-success.PNG" width="100%">
+  <br>
+  <em><b>Figure 3:</b> Jenkins Pipeline Stages Success View</em>
+</p>
+
 
 ---
 
@@ -116,11 +149,46 @@ The pipeline is defined in a `Jenkinsfile` and consists of the following stages:
 ---
 
 ## 📸 Deployment Proofs & Screenshots
-1. **Infrastructure Map**: `[Paste VPC Resource Map Here]`
-2. **Container Registry**: `[Paste ECR Images List Here]`
-3. **Health Status**: `[Paste Target Group "Healthy" Status Here]`
-4. **Live App**: `[Paste Browser View of ALB DNS Here]`
+1. **Infrastructure Map**: 
+  
+<p align="center">
+  <img src="./Screenshots/3-VPC.jpeg" width="100%">
+  <br>
+  <em><b>Figure 4:</b> VPC Resource Map</em>
+</p>
+
+2. **Container Registry**:
+   
+<p align="center">
+  <img src="./Screenshots/4-ECR.jpeg" width="100%">
+  <br>
+  <em><b>Figure 5:</b> ECR Images List </em>
+</p>
+
+3. **Health Status**:
+
+<p align="center">
+  <img src="./Screenshots/7-health-check.jpeg" width="100%">
+  <br>
+  <em><b>Figure 6:</b> Target Group "Healthy" Status </em>
+</p>
+
+4. **CI/CD Outputs**: 
+
+<p align="center">
+  <img src="./Screenshots/2-CI-CD-outputs.jpeg" width="100%">
+  <br>
+  <em><b>Figure 7:</b> CI/CD Outputs Links </em>
+</p>
+
+5. **Live App**: 
+
+<p align="center">
+  <img src="./Screenshots/6-app-running.jpeg" width="100%">
+  <br>
+  <em><b>Figure 1:</b>  Browser View of ALB DNS (APP Running) </em>
+</p>
 
 ---
-**Developed by:** [Islam (Eslam Mohamed)](https://github.com/BadrEldinWael)
+**Developed by:** [Eslam Harpy](https://github.com/EslamHarpy)
 *Infrastructure & DevOps Engineer*
